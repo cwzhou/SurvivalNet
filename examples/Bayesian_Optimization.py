@@ -1,4 +1,4 @@
-import bayesopt
+#import bayesopt
 import numpy as np
 from time import clock
 from CostFunction import cost_func
