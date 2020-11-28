@@ -1,8 +1,10 @@
 import os
-from survivalnet.train import train
+import sys
+sys.path.append("../survivalnet")
+import train
 import numpy as np
 import scipy.io as sio
-from survivalnet.optimization import SurvivalAnalysis
+from optimization import SurvivalAnalysis
 import theano
 import pickle
 
