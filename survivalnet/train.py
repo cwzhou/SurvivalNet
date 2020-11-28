@@ -89,7 +89,7 @@ def train(pretrain_set, train_set, test_set, pretrain_config, finetune_config,
 						lr=pretrain_config['pt_lr']))
 
 					if verbose: 
-						print 'Pre-training layer {}, epoch {}, cost'.format(i, epoch, numpy.mean(c))
+						print('Pre-training layer {}, epoch {}, cost'.format(i, epoch, numpy.mean(c)))
 
 		end_time = timeit.default_timer()
 		if verbose: 
@@ -142,7 +142,7 @@ def train(pretrain_set, train_set, test_set, pretrain_config, finetune_config,
 				train_set['X'], train_set['O'], train_set['A'], 1, *train_masks)
 		train_ci = survivalAnalysis.c_index(train_risk, train_set['T'], 1 - train_set['O'])
 	
-		# Calculates testing cost, risk and cindex using th eupdated model.
+		# Calculates testing cost, risk and cindex using the updated model.
 		test_cost, test_risk, _ = test(test_set['X'], test_set['O'], test_set['A'], 0, *test_masks)
 		test_ci = survivalAnalysis.c_index(test_risk, test_set['T'], 1 - test_set['O'])
 
@@ -152,12 +152,12 @@ def train(pretrain_set, train_set, test_set, pretrain_config, finetune_config,
 		train_costs.append(train_cost)
 		test_costs.append(test_cost)
 		if verbose: 
-			print (('epoch = {}, trn_cost = {}, trn_ci = {}, tst_cost = {},'
+			print(('epoch = {}, trn_cost = {}, trn_ci = {}, tst_cost = {},'
 					' tst_ci = {}').format(epoch, train_cost, train_ci,
 										   test_cost, test_ci))
 		if earlystp and epoch >= 15 and (epoch % 5 == 0):
 			if verbose:
-				print 'Checking overfitting!'
+				print('Checking overfitting!')
 			check, max_iter = isOverfitting(numpy.asarray(test_cindices))
 			if check:                
 				print(('Training Stopped Due to Overfitting! cindex = {},'
@@ -172,5 +172,5 @@ def train(pretrain_set, train_set, test_set, pretrain_config, finetune_config,
 		epoch += 1
 		if numpy.isnan(test_cost): break 
 	if verbose: 
-		print 'C-index score after {} epochs is: {}'.format(max_iter, max(test_cindices))
+		print('C-index score after {} epochs is: {}'.format(max_iter, max(test_cindices)))
 	return train_costs, train_cindices, test_costs, test_cindices, train_risk, test_risk, model, max_iter
