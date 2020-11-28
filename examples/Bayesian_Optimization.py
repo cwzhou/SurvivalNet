@@ -1,7 +1,7 @@
 #import bayesopt
 import numpy as np
-from time import clock
 from CostFunction import cost_func
+from time import perf_counter
 
 def tune():
 	"""Tunes hyperparameters of a feed forward net using Bayesian Optimization.
@@ -14,14 +14,20 @@ def tune():
 	params['n_iterations'] = 50
 	params['n_iter_relearn'] = 1
 	params['n_init_samples'] = 2
+	print(params)
 
-	print "*** Model Selection with BayesOpt ***"
+	print("*** Model Selection with BayesOpt ***")
 	n = 6  # n dimensions
 	# params: #layer, width, dropout, nonlinearity, l1_rate, l2_rate
 	lb = np.array([1 , 10 , 0., 0., 0., 0.])
 	ub = np.array([10, 500, 1., 1., 0., 0.])
+	print(cost_func)
+	print(n)
+	print(lb)
+	print(ub)
+	print(params)
 
-	start = clock()
+	start = perf_counter()
 	mvalue, x_out, _ = bayesopt.optimize(cost_func, n, lb, ub, params)
 
 	# Usage of BayesOpt with discrete set of values for hyper-parameters.
@@ -32,8 +38,8 @@ def tune():
 	#x_set = np.array([[layers, hsizes, drates], dtype=float).transpose()
 	#mvalue, x_out, _ = bayesopt.optimize_discrete(cost_func, x_set, params)
 
-	print "Result", mvalue, "at", x_out
-	print "Running time:", clock() - start, "seconds"
+	print("Result", mvalue, "at", x_out)
+	print("Running time:", perf_counter() - start, "seconds")
 	return mvalue, x_out
 
 
