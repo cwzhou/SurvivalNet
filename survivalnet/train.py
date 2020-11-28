@@ -4,11 +4,13 @@ import sys
 import theano
 import timeit
 
-from model import Model
-from optimization import BFGS
-from optimization import GDLS
-from optimization import SurvivalAnalysis 
-from optimization import isOverfitting
+import survivalnet as sn
+
+from sn.model import Model
+from sn.optimization import BFGS
+from sn.optimization import GDLS
+from sn.optimization import SurvivalAnalysis 
+from sn.optimization import isOverfitting
 
 LEARNING_RATE_DECAY = 1 
 
